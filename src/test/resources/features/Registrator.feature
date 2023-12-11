@@ -1,7 +1,7 @@
 Feature: Create New User
 
   Scenario Outline: Registration a new user on webpage
-    Given User is using "edge" as "<browser>"
+    #Given User is using "edge" as "<browser>"
     Given User is on the correct "<url>"
     And User enter "<DateOfBirth>" "<First Name>" and "<Last Name>"
     And User enter email "<Email>" and "<confirmEmail>"
@@ -12,7 +12,7 @@ Feature: Create New User
     And User fills in address "<address line 1>" and "<towncity>" and "<post code>" and "<county>" and "<country>"
     And User sets "<password>" and "<retypepassword>"
     And User fills in all anonymous information "<ethnicity>" and "<sexual orientation>" and "<religion>"
-    And "<Account confirmation>" is checked
+    And "<Account confirmation>" is clicked
     And "<Code of ethics and conduct>" are clicked
     And "<Join and proceed>" are clicked
     Then An "<Account>" is created

@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -18,8 +17,10 @@ import java.time.Duration;
 
 public class MyStepdefs {
 
-    private WebDriver driver;
+    private Registrator registrator;
 
+    private WebDriver driver;
+    private WebDriver WebDriverReference;
     private String browser;
 
     @And("Code of ethics and conduct are checked")
@@ -136,21 +137,12 @@ public class MyStepdefs {
 
     }
 
-    @And("{string} is checked")
-    public void isChecked(String Accountconfirmation) {
 
-        driver.findElement(By.cssSelector("label[for=sign_up_25")).click();
-
-        driver.findElement(By.cssSelector("label[for=sign_up_26")).click();
-
-        System.out.println("Account confirmation i checked");
-
-    }
 
     @And("{string} are checked")
     public void areChecked(String codeofethicsandconduct) {
 
-        driver.findElement(By.cssSelector("div:nth-of-type(7) > label > .box)).")).click();
+        driver.findElement(By.id("div:nth-of-type(7) > label > .box)).")).click();
 
         System.out.println("Code of ethics and conduct are checked");
 
@@ -189,7 +181,7 @@ public class MyStepdefs {
 
         driver = new EdgeDriver();
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
     }
 
     @And("User enter email {string} and {string}")
@@ -202,20 +194,23 @@ public class MyStepdefs {
 
 
     @Given("User is using {string} as {string}")
-    public void userIsUsingAs(String edge, String chrome) {
+    public void userIsUsingAs(String arg0, String arg1) {
+    }
 
-            {
-                if (browser.equals(("edge"))) {
-                    driver = new EdgeDriver();
-                } else if (browser.equals("chrome")) {
-                    driver = new ChromeDriver();
-                }
-                driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
+    @And("{string} is clicked")
+    public void isClicked(String arg0) {
+
+            driver.findElement(By.cssSelector("label[for=sign_up_25")).click();
+
+            driver.findElement(By.cssSelector("label[for=sign_up_26")).click();
+
+            System.out.println("Account confirmation i checked");
+
+        }
 
     }
-}
 
-    }
+
 
 
 
