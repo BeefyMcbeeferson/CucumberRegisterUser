@@ -1,11 +1,14 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -316,61 +319,56 @@ public class MyStepdefs<string, function> {
     @And("{string} are checked")
     public void areChecked(String codeofethicsandconduct) {
 
-            driver.findElement(By.cssSelector("label[for='fanmembersignup_agreetocodeofethicsandconduct'] span[class='box']")).click();
+        driver.findElement(By.cssSelector("label[for='fanmembersignup_agreetocodeofethicsandconduct'] span[class='box']")).click();
 
-            System.out.println("Code of ethics and conduct are checked");
-        
+        System.out.println("Code of ethics and conduct are checked");
+
     }
 
     @And("{string} are clicked")
     public void areClicked(String Joinandproceed) {
 
-            //Explicit wait, men får inte & funka :(
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            WebElement LastButton;
-            LastButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input#btnJoin")));
+        //Explicit wait, men får inte & funka :(
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement LastButton;
+        LastButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input#btnJoin")));
 
-            driver.findElement(By.cssSelector("input#btnJoin")).click();
-            System.out.println("Join and proceed is clicked");
-        
+        driver.findElement(By.cssSelector("input#btnJoin")).click();
+        System.out.println("Join and proceed is clicked");
+
     }
 
     @Then("An {string} is created")
     public void anIsCreated(String Account) {
 
-            System.out.println("Account is created");
+        System.out.println("Account is created");
 
-        }
-        
     }
 
-    /*@Given("User has the correct {string}")
+    @Given("User has the correct {string}")
     public void userHasTheCorrect(String url) {
 
-            driver = new EdgeDriver();
-            driver.manage().window().maximize();
-            driver.navigate().to("https://membership.basketballengland.co.uk/NewFullAccount");
-            driver.get(url);
-            driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
-            driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
+        driver.navigate().to("https://membership.basketballengland.co.uk/NewFullAccount");
+        driver.get(url);
 
-            System.out.println("Correct url is entered");
+    }
+
+    @Given("User is using {string} as {string}")
+    public void userIsUsingAs(String arg0, String arg1) {
+
+        {
+            if (browser.equals(("edge"))) {
+                driver = new EdgeDriver();
+            } else if (browser.equals("chrome")) {
+                driver = new ChromeDriver();
+            }
+
         }
-
-    }*/
-
+    }
 
     class Registrator {
-
-        private string result;
-
-
-        public string getResult() {
-            return result;
-        }
-
-        private class string {
-        }
 
 
         /*@Given("User is using {string} as {string}")
@@ -388,7 +386,8 @@ public class MyStepdefs<string, function> {
             }*/
 
 
-        }
+    }
+}
 
 
 
