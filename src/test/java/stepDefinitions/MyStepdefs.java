@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,10 +18,8 @@ import java.time.Duration;
 
 public class MyStepdefs {
 
-    private Registrator registrator;
-
     private WebDriver driver;
-    private WebDriver WebDriverReference;
+
     private String browser;
 
     @And("Code of ethics and conduct are checked")
@@ -200,20 +199,24 @@ public class MyStepdefs {
         driver.findElement(By.id("member_confirmemailaddress")).sendKeys(confirmEmail);
 
     }
+
+
+    @Given("User is using {string} as {string}")
+    public void userIsUsingAs(String edge, String chrome) {
+
+            {
+                if (browser.equals(("edge"))) {
+                    driver = new EdgeDriver();
+                } else if (browser.equals("chrome")) {
+                    driver = new ChromeDriver();
+                }
+                driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
+
+    }
 }
 
-    /*@Given("User is using {string} as {string}")
-    public void userIsUsingAs(String arg0, String arg1) {
+    }
 
-        {
-            if (browser.equals(("edge"))) {
-                driver = new EdgeDriver();
-            } else if (browser.equals("chrome")) {
-                driver = new ChromeDriver();
-            }
-            driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
-
-        }*/
 
 
     class Registrator {

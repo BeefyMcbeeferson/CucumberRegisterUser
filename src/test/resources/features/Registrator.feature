@@ -1,7 +1,7 @@
 Feature: Create New User
 
   Scenario Outline: Registration a new user on webpage
-    #Given User is using "edge" as "<browser>"
+    Given User is using "edge" as "<browser>"
     Given User is on the correct "<url>"
     And User enter "<DateOfBirth>" "<First Name>" and "<Last Name>"
     And User enter email "<Email>" and "<confirmEmail>"
@@ -17,8 +17,9 @@ Feature: Create New User
     And "<Join and proceed>" are clicked
     Then An "<Account>" is created
     Examples:
-      | url                                                       | DateOfBirth | First Name | Last Name | Email                      | confirmEmail               |Mobilephone | gender | nationality | country of birth | full name | relationship | phonenumber | address line 1                                 | towncity   | post code | county        | country   | password          | retypepassword   | ethnicity         | sexual orientation | religion         | Account confirmation |Code of ethics and conduct|Join and proceed |Account|
-      | https://membership.basketballengland.co.uk/NewFullAccount | 12/02/1980  | Robert     | Lucas     | robert.lucaas.80@gmail.com | robert.lucaas.80@gmail.com |+46702064151|  male  |   Swedish   | Sweden           | Anna      | wife         | +46768778384| 31 The Square, Tarland, Aberdeenshire Scotland | Aberchirder| AB34 4TX  | Aberdeenshire | Sweden    | EttEnkeltLösenord | EttEnkeltLösenord| prefer not to say | prefer not to say  |prefer not to say | clicked              |clicked                   |clicked          |  yes  |
+     |browser | url                                                       | DateOfBirth | First Name | Last Name | Email                      | confirmEmail               |Mobilephone | gender | nationality | country of birth | full name | relationship | phonenumber | address line 1                                 | towncity   | post code | county        | country   | password          | retypepassword   | ethnicity         | sexual orientation | religion         | Account confirmation |Code of ethics and conduct|Join and proceed |Account|
+     |edge    | https://membership.basketballengland.co.uk/NewFullAccount | 12/02/1980  | Robert     | Lucas     | robert.lucaas.80@gmail.com | robert.lucaas.80@gmail.com |+46702064151|  male  |   Swedish   | Sweden           | Anna      | wife         | +46768778384| 31 The Square, Tarland, Aberdeenshire Scotland | Aberchirder| AB34 4TX  | Aberdeenshire | Sweden    | EttEnkeltLösenord | EttEnkeltLösenord| prefer not to say | prefer not to say  |prefer not to say | clicked              |clicked                   |clicked          |  yes  |
+     |chrome  |                                                           |             |            |           |                            |                            |            |        |             |                  |           |              |             |                                                |            |           |               |           |                   |                  |                   |                    |                  |                      |                          |                 |       |
 
   #Scenario: Create new user last name is missing
     #Given User have correct url
