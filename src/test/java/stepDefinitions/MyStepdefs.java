@@ -4,10 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,18 +20,25 @@ import java.time.Duration;
 
 public class MyStepdefs {
 
-    private Registrator registrator;
+    /*System.setProperty("webdriver.chrome.driver", "C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+
+    ChromeOptions co = new ChromeOptions();
+	    co.setBinary("C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+    WebDriver driver = new ChromeDriver(co);
+	    driver.get("https://unidemyglobal.com/");*/
 
     private WebDriver driver;
-    private WebDriver WebDriverReference;
-    private String browser;
 
     @And("Code of ethics and conduct are checked")
     public void codeOfEthicsAndConductAreChecked() {
 
-        driver.findElement(By.cssSelector("label[for='fanmembersignup_agreetocodeofethicsandconduct'] span[class='box']")).click();
+        WebElement element = driver.findElement(By.xpath("//*[contains(text(), 'Code of Ethics and Conduct (applies to all Members)')]/following::span[@class='box']"));
 
-        System.out.println("Code of ethics and conduct are checked");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
 
     }
 
@@ -151,11 +161,6 @@ public class MyStepdefs {
     @And("{string} are clicked")
     public void areClicked(String Joinandproceed) {
 
-        //Explicit wait, men får inte & funka :(
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        //WebElement LastButton;
-        //LastButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(Joinandproceed)));
-
         driver.findElement(By.cssSelector("input#btnJoin")).click();
         System.out.println("Join and proceed is clicked");
 
@@ -180,6 +185,7 @@ public class MyStepdefs {
     public void userIsOnTheCorrect(String url) {
 
         driver = new EdgeDriver();
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
     }
@@ -190,11 +196,6 @@ public class MyStepdefs {
         driver.findElement(By.id("member_emailaddress")).sendKeys(Email);
         driver.findElement(By.id("member_confirmemailaddress")).sendKeys(confirmEmail);
 
-    }
-
-
-    @Given("User is using {string} as {string}")
-    public void userIsUsingAs(String arg0, String arg1) {
     }
 
     @And("{string} is clicked")
@@ -208,21 +209,28 @@ public class MyStepdefs {
 
         }
 
-    }
+    @And("User enter {string} {string}")
+    public void userEnter(String DateOfBirth, String firstName) {
 
-
-
-
-
-    class Registrator {
+        driver.findElement(By.id("dp")).sendKeys(DateOfBirth);
+        driver.findElement(By.id("member_firstname")).sendKeys(firstName);
 
     }
 
+    @Then("An Account is not created and throw error last name is missing")
+    public void anAccountIsNotCreatedAndThrowErrorLastNameIsMissing() {
+
+        String expectedText = "Last Name is required";
+        WebElement lastName = driver.findElement(By.xpath("//*[@id='member_lastname__label']/following-sibling::*/span"));
+        String lastNameText = lastName.getText();
+        Assert.assertEquals(lastNameText,expectedText, "Account is created successfully without LastName");
+    }
 
 
-
-
-
-
-
-
+    @And("User enter email address")
+    public void userEnterEmailAddress() {
+        String emailId = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+}
