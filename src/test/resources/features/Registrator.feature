@@ -52,10 +52,10 @@ Feature: Create New User
     And "<Account confirmation>" is clicked
     And "<Code of ethics and conduct>" are clicked
     And "<Join and proceed>" are clicked
-    Then An Account is not created and throw error when password missmatch
+    Then An Account is created and throw error when password mismatch
     Examples:
-      | browser | url                                                       | DateOfBirth | First Name | Email                      | confirmEmail               | Mobilephone  | gender | nationality | country of birth | full name | relationship | phonenumber  | address line 1                                 | towncity    | post code | county        | country | password           | retypepassword   | ethnicity         | sexual orientation | religion          | Account confirmation | Code of ethics and conduct | Join and proceed | Account |
-      | edge    | https://membership.basketballengland.co.uk/NewFullAccount | 12/02/1980  | Robert     | robert.lucaas.80@gmail.com | robert.lucaas.80@gmail.com | +46702064151 | male   | Swedish     | Sweden           | Anna      | wife         | +46768778384 | 31 The Square, Tarland, Aberdeenshire Scotland | Aberchirder | AB34 4TX  | Aberdeenshire | Sweden  | EttEnkeltLösenord1 | EttEnkeltLösenor | prefer not to say | prefer not to say  | prefer not to say | clicked              | clicked                    | clicked          | yes     |
+      | browser | url                                                       | DateOfBirth | First Name |Last Name| Email                      | confirmEmail               | Mobilephone  | gender | nationality | country of birth | full name | relationship | phonenumber  | address line 1                                 | towncity    | post code | county        | country | password           | retypepassword   | ethnicity         | sexual orientation | religion          | Account confirmation | Code of ethics and conduct | Join and proceed | Account |
+      | edge    | https://membership.basketballengland.co.uk/NewFullAccount | 12/02/1980  | Robert     |Lucas    |robert.lucaas.80@gmail.com  | robert.lucaas.80@gmail.com | +46702064151 | male   | Swedish     | Sweden           | Anna      | wife         | +46768778384 | 31 The Square, Tarland, Aberdeenshire Scotland | Aberchirder | AB34 4TX  | Aberdeenshire | Sweden  | EttEnkeltLösenord1 | EttEnkeltLösenor | prefer not to say | prefer not to say  | prefer not to say | clicked              | clicked                    | clicked          | yes     |
 
   #Scenario: Create new user terms and conditions is not checked
     #Given User have correct url
@@ -68,4 +68,4 @@ Feature: Create New User
     #When Code of ethics and conduct NOT are checked
     #Then An account is NOT created
 
-  #Explicit wait, provat massas men får inte & funka :(
+  #Explicit wait, provat massor men får inte & funka :(

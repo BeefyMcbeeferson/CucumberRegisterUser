@@ -20,13 +20,6 @@ import java.time.Duration;
 
 public class MyStepdefs {
 
-    /*System.setProperty("webdriver.chrome.driver", "C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
-
-    ChromeOptions co = new ChromeOptions();
-	    co.setBinary("C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
-    WebDriver driver = new ChromeDriver(co);
-	    driver.get("https://unidemyglobal.com/");*/
-
     private WebDriver driver;
 
     @And("Code of ethics and conduct are checked")
@@ -233,4 +226,15 @@ public class MyStepdefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
+
+    @Then("An Account is created and throw error when password mismatch")
+    public void anAccountIsCreatedAndThrowErrorWhenPasswordMismatch() {
+
+        String expectedText = "Password did not match";
+        WebElement retypepassword = driver.findElement(By.xpath("//input[@id='sign_up_10']"));
+        String retypepasswordText = retypepassword.getText();
+        Assert.assertEquals(retypepasswordText,expectedText, "Account is created successfully without Password did not match");
+
+    }
+
 }
