@@ -229,7 +229,7 @@ public class MyStepdefs {
     @Then("An Account is not created and throw error when password missmatch")
     public void anAccountIsNotCreatedAndThrowErrorWhenPasswordMissamatch() {
 
-        String expectedPassword = "Confirm Password is required";
+        String expectedPassword = "Password did not match";
         WebElement password = driver.findElement(By.xpath("//*[@name='ConfirmPassword']/following-sibling::*//span"));
         String confirmedPassword = password.getText();
         Assert.assertEquals(confirmedPassword,expectedPassword, "Account is created successfully without confirmed password");
