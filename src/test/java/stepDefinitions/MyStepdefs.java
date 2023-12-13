@@ -20,6 +20,13 @@ import java.time.Duration;
 
 public class MyStepdefs {
 
+    /*System.setProperty("webdriver.chrome.driver", "C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+
+    ChromeOptions co = new ChromeOptions();
+	    co.setBinary("C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+    WebDriver driver = new ChromeDriver(co);
+	    driver.get("https://unidemyglobal.com/");*/
+
     private WebDriver driver;
 
     @And("Code of ethics and conduct are checked")
@@ -154,7 +161,7 @@ public class MyStepdefs {
     @And("{string} are clicked")
     public void areClicked(String Joinandproceed) {
 
-        driver.findElement(By.cssSelector("input#btnJoin")).click();
+        driver.findElement(By.id("btnJoin")).click();
         System.out.println("Join and proceed is clicked");
 
     }
@@ -169,10 +176,10 @@ public class MyStepdefs {
     @And("User enter {string} {string} and {string}")
     public void userEnterAnd(String DateOfBirth, String firstName, String lastName) {
 
-            driver.findElement(By.id("dp")).sendKeys(DateOfBirth);
-            driver.findElement(By.id("member_firstname")).sendKeys(firstName);
-            driver.findElement(By.id("member_lastname")).sendKeys(lastName);
-        }
+        driver.findElement(By.id("dp")).sendKeys(DateOfBirth);
+        driver.findElement(By.id("member_firstname")).sendKeys(firstName);
+        driver.findElement(By.id("member_lastname")).sendKeys(lastName);
+    }
 
     @Given("User is on the correct {string}")
     public void userIsOnTheCorrect(String url) {
@@ -194,13 +201,13 @@ public class MyStepdefs {
     @And("{string} is clicked")
     public void isClicked(String arg0) {
 
-            driver.findElement(By.cssSelector("label[for=sign_up_25")).click();
+        driver.findElement(By.cssSelector("label[for=sign_up_25")).click();
 
-            driver.findElement(By.cssSelector("label[for=sign_up_26")).click();
+        driver.findElement(By.cssSelector("label[for=sign_up_26")).click();
 
-            System.out.println("Account confirmation i checked");
+        System.out.println("Account confirmation i checked");
 
-        }
+    }
 
     @And("User enter {string} {string}")
     public void userEnter(String DateOfBirth, String firstName) {
@@ -219,6 +226,23 @@ public class MyStepdefs {
         Assert.assertEquals(lastNameText,expectedText, "Account is created successfully without LastName");
     }
 
+    @Then("An Account is not created and throw error when password missmatch")
+    public void anAccountIsNotCreatedAndThrowErrorWhenPasswordMissamatch() {
+
+        String expectedPassword = "Confirm Password is required";
+        WebElement password = driver.findElement(By.xpath("//*[@name='ConfirmPassword']/following-sibling::*//span"));
+        String confirmedPassword = password.getText();
+        Assert.assertEquals(confirmedPassword,expectedPassword, "Account is created successfully without confirmed password");
+    }
+
+    @Then("An Account is not created and throw error when Code of Ethics not selected")
+    public void anAccountIsNotCreatedAndThrowErrorWhenCodeOfEthisNotSelected() {
+
+        String expectedWarning = "You must confirm that you have read, understood and agree to the Code of Ethics and Conduct";
+        WebElement cOEText = driver.findElement(By.xpath("//*[@name='AgreeToCodeOfEthicsAndConduct']/following-sibling::*[@class='warning field-validation-error']"));
+        String cOETextWarning = cOEText.getText();
+        Assert.assertEquals(cOETextWarning,expectedWarning, "Account is created successfully without confirmed password");
+    }
 
     @And("User enter email address")
     public void userEnterEmailAddress() {
@@ -226,15 +250,4 @@ public class MyStepdefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-
-    @Then("An Account is created and throw error when password mismatch")
-    public void anAccountIsCreatedAndThrowErrorWhenPasswordMismatch() {
-
-        String expectedText = "Password did not match";
-        WebElement retypepassword = driver.findElement(By.xpath("//input[@id='sign_up_10']"));
-        String retypepasswordText = retypepassword.getText();
-        Assert.assertEquals(retypepasswordText,expectedText, "Account is created successfully without Password did not match");
-
-    }
-
 }
