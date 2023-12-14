@@ -11,26 +11,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class MyStepdefs {
 
-    /*System.setProperty("webdriver.chrome.driver", "C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+    /*System.setProperty("webdriver.chrome.driver", "C:\\Users\\RobertLucas\\Downloads\\chrome-win64.zip\\chrome-win64\\chromedriver.exe");
 
     ChromeOptions co = new ChromeOptions();
-	    co.setBinary("C://Users//RobertLucas//Downloads//chrome-win64.zip//chrome-win64//chromedriver.exe");
+	    co.setBinary("C:\\Users\\RobertLucas\\Downloads\\chrome-win64.zip\\chrome-win64\\chromedriver.exe");
     WebDriver driver = new ChromeDriver(co);
 	    driver.get("https://unidemyglobal.com/");*/
 
     private WebDriver driver;
 
-    @And("Code of ethics and conduct are checked")
-    public void codeOfEthicsAndConductAreChecked() {
+    @And("Code of ethics and conduct are clicked")
+    public void codeOfEthicsAndConductAreClicked() {
 
         WebElement element = driver.findElement(By.xpath("//*[contains(text(), 'Code of Ethics and Conduct (applies to all Members)')]/following::span[@class='box']"));
 
@@ -40,18 +36,7 @@ public class MyStepdefs {
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
 
-    }
-
-    @And("Join and proceed are clicked")
-    public void joinAndProceedAreClicked() throws InterruptedException {
-
-        //Explicit wait, men får inte & funka :(
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement LastButton;
-        LastButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input#btnJoin")));
-
-        driver.findElement(By.cssSelector("input#btnJoin")).click();
-        System.out.println("Join and proceed is clicked");
+        System.out.println("Code of ethics and conduct are filled in");
 
     }
 
@@ -116,7 +101,7 @@ public class MyStepdefs {
         dropDown = new Select(driver.findElement(By.id("ddlCountry")));
         dropDown.selectByIndex(211);
 
-        System.out.println("Address is filled in");
+        System.out.println("Member details is filled in");
 
     }
 
@@ -147,22 +132,12 @@ public class MyStepdefs {
 
     }
 
-
-
-    @And("{string} are checked")
-    public void areChecked(String codeofethicsandconduct) {
-
-        driver.findElement(By.id("div:nth-of-type(7) > label > .box)).")).click();
-
-        System.out.println("Code of ethics and conduct are checked");
-
-    }
-
     @And("{string} are clicked")
     public void areClicked(String Joinandproceed) {
 
         driver.findElement(By.id("btnJoin")).click();
-        System.out.println("Join and proceed is clicked");
+
+        System.out.println("Join and proceed are clicked");
 
     }
 
@@ -186,6 +161,7 @@ public class MyStepdefs {
 
         driver = new EdgeDriver();
         driver = new FirefoxDriver();
+
         driver.manage().window().maximize();
         driver.get("https://membership.basketballengland.co.uk/NewFullAccount");
     }
@@ -226,8 +202,8 @@ public class MyStepdefs {
         Assert.assertEquals(lastNameText,expectedText, "Account is created successfully without LastName");
     }
 
-    @Then("An Account is not created and throw error when password missmatch")
-    public void anAccountIsNotCreatedAndThrowErrorWhenPasswordMissamatch() {
+    @Then("An Account is not created and throw error when password mismatch")
+    public void anAccountIsNotCreatedAndThrowErrorWhenPasswordMismatch() {
 
         String expectedPassword = "Password did not match";
         WebElement password = driver.findElement(By.xpath("//*[@name='ConfirmPassword']/following-sibling::*//span"));
@@ -236,7 +212,7 @@ public class MyStepdefs {
     }
 
     @Then("An Account is not created and throw error when Code of Ethics not selected")
-    public void anAccountIsNotCreatedAndThrowErrorWhenCodeOfEthisNotSelected() {
+    public void anAccountIsNotCreatedAndThrowErrorWhenCodeOfEthicsNotSelected() {
 
         String expectedWarning = "You must confirm that you have read, understood and agree to the Code of Ethics and Conduct";
         WebElement cOEText = driver.findElement(By.xpath("//*[@name='AgreeToCodeOfEthicsAndConduct']/following-sibling::*[@class='warning field-validation-error']"));
@@ -247,7 +223,6 @@ public class MyStepdefs {
     @And("User enter email address")
     public void userEnterEmailAddress() {
         String emailId = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
-        // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 }
